@@ -1,50 +1,132 @@
-\# Day 1 — SQL SELECT and WHERE
+\# Day 1 — SQL Fundamentals
 
 
 
-\## What I learned today
+\## Concepts Learned
 
-\- SELECT picks which columns to show
+\- SELECT → picks which columns to show
 
-\- WHERE filters rows based on a condition
+\- WHERE → filters rows before grouping
 
-\- ORDER BY sorts the results
+\- ORDER BY → sorts results (ASC = low to high, DESC = high to low)
 
-\- \* means select all columns
+\- DISTINCT → removes duplicate values
+
+\- GROUP BY → groups rows together
+
+\- HAVING → filters after grouping
+
+\- COUNT(\*) → counts rows in each group
+
+\- AND / OR → combine multiple conditions
+
+\- AS → gives a column a nickname (alias)
 
 
 
-\## Queries I practiced
+\## Golden Rule — SQL Clause Order
+
+SELECT → FROM → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT
 
 
 
-\-- Select everything
+\## Memory Trick
+
+"Some Friendly Whales Go Home Often Late"
+
+
+
+\## Queries I Practiced
+
+
+
+\-- Basic SELECT
 
 SELECT \* FROM students;
 
+SELECT name, city FROM students;
 
 
-\-- Filter with WHERE
+
+\-- WHERE conditions
 
 SELECT \* FROM students WHERE city = 'Dallas';
 
-
-
-\-- Order results
-
-SELECT name, age FROM students ORDER BY age ASC;
+SELECT \* FROM students WHERE age > 23;
 
 
 
-\## What confused me
+\-- AND / OR
 
-\- (write anything that confused you here)
+SELECT \* FROM students WHERE city = 'Dallas' AND grade = 'A';
+
+SELECT \* FROM students WHERE city = 'Dallas' OR city = 'Houston';
 
 
 
-\## Tomorrow I will practice
+\-- ORDER BY
 
-\- More WHERE conditions
+SELECT \* FROM students ORDER BY age ASC;
 
-\- AND / OR operators
+SELECT \* FROM students ORDER BY age DESC;
+
+
+
+\-- DISTINCT
+
+SELECT DISTINCT city FROM students;
+
+
+
+\-- GROUP BY + COUNT
+
+SELECT city, COUNT(\*) as total\_students
+
+FROM students
+
+GROUP BY city;
+
+
+
+\-- HAVING
+
+SELECT city, COUNT(\*) as total\_students
+
+FROM students
+
+GROUP BY city
+
+HAVING COUNT(\*) > 1;
+
+
+
+\-- WHERE + GROUP BY + HAVING combined
+
+SELECT city, COUNT(\*) as total\_grade\_a
+
+FROM students
+
+WHERE grade = 'A'
+
+GROUP BY city
+
+HAVING COUNT(\*) > 1
+
+ORDER BY city;
+
+
+
+\## Mistakes I Made Today
+
+\- Forgot GROUP BY must come before HAVING
+
+\- Used count(grade='A') instead of WHERE grade='A'
+
+\- Table name typo — "student" instead of "students"
+
+
+
+\## What I Will Learn Next
+
+\- JOINs — INNER, LEFT, RIGHT, FULL, SELF, CROSS
 
